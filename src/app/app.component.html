@@ -1,76 +1,301 @@
-<!-- Navbar -->
-<nav class="fixed w-full bg-white shadow z-50">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-    <h1 class="text-xl font-bold text-indigo-600">Alaa</h1>
-    <ul class="flex space-x-6 text-gray-700 font-medium">
-      <li><a href="#home" class="hover:text-indigo-600">Home</a></li>
-      <li><a href="#about" class="hover:text-indigo-600">About</a></li>
-      <li><a href="#skills" class="hover:text-indigo-600">Skills</a></li>
-      <li><a href="#projects" class="hover:text-indigo-600">Projects</a></li>
-      <li><a href="#contact" class="hover:text-indigo-600">Contact</a></li>
-    </ul>
+<!-- Root layout -->
+<div class="min-h-screen font-sans text-gray-800 bg-gray-50">
+
+  <!-- Navbar -->
+  <header [class.shadow-lg]="scrolled" class="fixed w-full z-50 transition-colors duration-300"
+          [ngClass]="{'bg-white': scrolled, 'bg-transparent': !scrolled}">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="https://github.com/EngAlaaMahmoud.png" alt="Alaa" class="w-10 h-10 rounded-full border-2 border-indigo-500" />
+        <div>
+          <h1 class="text-lg font-semibold text-indigo-600">Alaa Mahmoud</h1>
+          <p class="text-xs text-gray-500 -mt-1">Senior .NET & Frontend Engineer</p>
+        </div>
+      </div>
+
+      <!-- desktop menu -->
+      <nav class="hidden md:flex items-center gap-6 text-gray-700 font-medium">
+        <button (click)="scrollTo('hero')" class="hover:text-indigo-600">Home</button>
+        <button (click)="scrollTo('about')" class="hover:text-indigo-600">About</button>
+        <button (click)="scrollTo('skills')" class="hover:text-indigo-600">Skills</button>
+        <button (click)="scrollTo('projects')" class="hover:text-indigo-600">Projects</button>
+        <button (click)="scrollTo('contact')" class="hover:text-indigo-600">Contact</button>
+        <a href="assets/resume.pdf" download class="ml-4 inline-block bg-indigo-600 text-white px-3 py-2 rounded-lg shadow hover:scale-105 transition">Download CV</a>
+      </nav>
+
+      <!-- mobile toggle -->
+      <div class="md:hidden flex items-center">
+        <button aria-label="menu" (click)="toggleMenu()" class="p-2 rounded-md hover:bg-gray-200">
+          <svg *ngIf="!isMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/></svg>
+          <svg *ngIf="isMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div *ngIf="isMenuOpen" class="md:hidden bg-white border-t">
+      <div class="flex flex-col px-4 py-4 gap-2">
+        <button (click)="scrollTo('hero')" class="text-left py-2 hover:bg-gray-100 rounded">Home</button>
+        <button (click)="scrollTo('about')" class="text-left py-2 hover:bg-gray-100 rounded">About</button>
+        <button (click)="scrollTo('skills')" class="text-left py-2 hover:bg-gray-100 rounded">Skills</button>
+        <button (click)="scrollTo('projects')" class="text-left py-2 hover:bg-gray-100 rounded">Projects</button>
+        <button (click)="scrollTo('contact')" class="text-left py-2 hover:bg-gray-100 rounded">Contact</button>
+        <a href="assets/resume.pdf" download class="mt-2 inline-block bg-indigo-600 text-white px-3 py-2 rounded-lg text-center">Download CV</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main class="pt-20">
+    <section id="hero" class="min-h-[75vh] flex items-center">
+      <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+        <div class="flex-1" data-aos="fade-right">
+          <h2 class="text-4xl md:text-6xl font-extrabold leading-tight text-gray-900">Hi 👋, I'm <span class="text-indigo-600">Alaa Mahmoud</span></h2>
+          <p class="mt-4 text-lg text-gray-600">Senior .NET Developer • Backend Specialist • Angular & Cloud Enthusiast</p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="https://github.com/EngAlaaMahmoud" target="_blank" class="px-5 py-3 bg-gray-900 text-white rounded-lg shadow hover:scale-105 transition">GitHub</a>
+            <a href="https://portfolio-irgf.vercel.app/" target="_blank" class="px-5 py-3 bg-indigo-600 text-white rounded-lg shadow hover:scale-105 transition">Portfolio</a>
+            <a href="#contact" (click)="scrollTo('contact')" class="px-5 py-3 border border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition">Contact Me</a>
+          </div>
+
+          <div class="mt-6 flex items-center gap-6 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"/></svg>
+              <span>7+ years experience</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18"/></svg>
+              <span>16+ repositories</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-1 flex justify-center" data-aos="fade-left">
+          <div class="w-56 h-56 rounded-full shadow-2xl overflow-hidden border-4 border-white transform hover:scale-105 transition">
+            <img src="https://github.com/EngAlaaMahmoud.png" alt="Alaa" class="w-full h-full object-cover"/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-16 bg-white">
+      <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+        <div data-aos="fade-up">
+          <h3 class="text-3xl font-bold mb-4">About Me</h3>
+          <p class="text-gray-700 leading-relaxed">
+            I'm <strong>Alaa Mahmoud</strong>, a Senior .NET Developer with experience building scalable backend systems using
+            <strong>.NET Core, Web API</strong> and modern frontend with <strong>Angular</strong>. I focus on clean architecture,
+            performance and maintainable code.
+          </p>
+
+          <ul class="mt-6 space-y-2 text-gray-700">
+            <li>🏢 Worked on enterprise systems, microservices and cloud migrations.</li>
+            <li>⚙️ Strong in Database design, API design and CI/CD automation.</li>
+            <li>🎯 Passionate about performance, observability and engineering best-practices.</li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-left">
+          <h4 class="text-xl font-semibold mb-3">Experience Snapshot</h4>
+          <div class="space-y-3">
+            <div class="p-4 bg-gray-50 rounded-lg shadow-sm">
+              <div class="flex justify-between text-sm text-gray-600"><span>Senior .NET Developer</span><span>2021 — Present</span></div>
+              <div class="text-gray-700 mt-2">Leading backend development for enterprise apps with microservices and Azure.</div>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg shadow-sm">
+              <div class="flex justify-between text-sm text-gray-600"><span>.NET Developer</span><span>2018 — 2021</span></div>
+              <div class="text-gray-700 mt-2">Built web APIs and integrated payment & reporting systems.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-16 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-3xl font-bold text-center mb-8" data-aos="fade-up">Skills</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in">
+            <h4 class="font-semibold">Languages</h4>
+            <div class="mt-3 space-y-2 text-sm text-gray-600">
+              <div>C#</div>
+              <div>TypeScript</div>
+              <div>JavaScript</div>
+              <div>SQL</div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="100">
+            <h4 class="font-semibold">Frameworks & Tools</h4>
+            <div class="mt-3 space-y-2 text-sm text-gray-600">
+              <div>ASP.NET Core · Entity Framework</div>
+              <div>Angular · RxJS</div>
+              <div>Docker · Kubernetes</div>
+              <div>Azure · GitHub Actions</div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="200">
+            <h4 class="font-semibold">Databases</h4>
+            <div class="mt-3 space-y-2 text-sm text-gray-600">
+              <div>SQL Server</div>
+              <div>PostgreSQL</div>
+              <div>MongoDB</div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-white rounded-lg shadow hover:shadow-lg transition" data-aos="zoom-in" data-aos-delay="300">
+            <h4 class="font-semibold">Frontend</h4>
+            <div class="mt-3 space-y-2 text-sm text-gray-600">
+              <div>Angular · TailwindCSS</div>
+              <div>HTML5 · CSS3 · Accessibility</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- progress example -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div data-aos="fade-up">
+            <div class="flex justify-between mb-2"><span>Angular</span><span class="text-sm text-gray-600">90%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="h-3 rounded-full" style="width:90%; background:linear-gradient(90deg,#6366f1,#8b5cf6)"></div>
+            </div>
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="100">
+            <div class="flex justify-between mb-2"><span>.NET Core</span><span class="text-sm text-gray-600">95%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="h-3 rounded-full" style="width:95%; background:linear-gradient(90deg,#06b6d4,#3b82f6)"></div>
+            </div>
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="200">
+            <div class="flex justify-between mb-2"><span>Microservices / Cloud</span><span class="text-sm text-gray-600">75%</span></div>
+            <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div class="h-3 rounded-full" style="width:75%; background:linear-gradient(90deg,#10b981,#06b6d4)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-3xl font-bold text-center mb-10" data-aos="fade-up">Featured Projects</h3>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Project 1: Portfolio -->
+          <article class="bg-gray-50 rounded-lg shadow hover:shadow-2xl transition overflow-hidden" data-aos="fade-up">
+            <img src="https://portfolio-irgf.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhero...." alt="Portfolio screenshot" class="w-full h-44 object-cover" onerror="this.src='https://via.placeholder.com/600x300.png?text=Portfolio'"/>
+            <div class="p-4">
+              <h4 class="font-semibold text-lg">Portfolio Website</h4>
+              <p class="text-sm text-gray-600 mt-2">Personal portfolio built with Next.js and Tailwind (hosted on Vercel).</p>
+              <div class="mt-4 flex gap-3">
+                <a href="https://portfolio-irgf.vercel.app/" target="_blank" class="px-3 py-2 bg-indigo-600 text-white rounded-lg">Live</a>
+                <a href="https://github.com/EngAlaaMahmoud" target="_blank" class="px-3 py-2 bg-gray-900 text-white rounded-lg">Code</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2: InventoryAJ (example) -->
+          <article class="bg-gray-50 rounded-lg shadow hover:shadow-2xl transition overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+            <img src="https://via.placeholder.com/600x300.png?text=InventoryAJ" alt="InventoryAJ" class="w-full h-44 object-cover"/>
+            <div class="p-4">
+              <h4 class="font-semibold text-lg">InventoryAJ (Voidex)</h4>
+              <p class="text-sm text-gray-600 mt-2">Inventory management system using .NET Core & Razor Pages.</p>
+              <div class="mt-4 flex gap-3">
+                <a href="https://github.com/EngAlaaMahmoud/inventoryAJ" target="_blank" class="px-3 py-2 bg-indigo-600 text-white rounded-lg">Code</a>
+                <a href="#" target="_blank" class="px-3 py-2 border border-indigo-600 text-indigo-600 rounded-lg">Docs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3: E-Commerce -->
+          <article class="bg-gray-50 rounded-lg shadow hover:shadow-2xl transition overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+            <img src="https://via.placeholder.com/600x300.png?text=E-Commerce+Website" alt="E-Commerce" class="w-full h-44 object-cover"/>
+            <div class="p-4">
+              <h4 class="font-semibold text-lg">E-Commerce Website</h4>
+              <p class="text-sm text-gray-600 mt-2">Angular + .NET Core e-commerce with cart and payments.</p>
+              <div class="mt-4 flex gap-3">
+                <a href="https://github.com/EngAlaaMahmoud/Ecomerce-project" target="_blank" class="px-3 py-2 bg-indigo-600 text-white rounded-lg">Code</a>
+                <a href="#" target="_blank" class="px-3 py-2 border border-indigo-600 text-indigo-600 rounded-lg">Live</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements & Stats -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6 text-center" data-aos="fade-up">
+        <h3 class="text-3xl font-bold mb-6">Achievements</h3>
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-stretch">
+          <div class="p-6 bg-white rounded-lg shadow flex-1">
+            <h4 class="text-xl font-semibold">Open Source Collaboration</h4>
+            <p class="text-sm text-gray-600 mt-2">Contributed to multiple repos and PR reviews.</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow flex-1">
+            <h4 class="text-xl font-semibold">Enterprise Projects</h4>
+            <p class="text-sm text-gray-600 mt-2">Delivered production apps with clean architecture.</p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow flex-1">
+            <h4 class="text-xl font-semibold">Fast Response</h4>
+            <p class="text-sm text-gray-600 mt-2">Maintained high velocity on team sprints & releases.</p>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <!-- GitHub Readme stats images (dynamic) -->
+          <img src="https://github-readme-stats.vercel.app/api?username=EngAlaaMahmoud&show_icons=true&theme=radical" class="mx-auto max-w-full" alt="GitHub Stats"/>
+        </div>
+      </div>
+    </section>
+
+  <!-- Contact -->
+<section id="contact" class="py-16 bg-white">
+  <div class="max-w-3xl mx-auto px-6" data-aos="fade-up">
+    <h3 class="text-3xl font-bold text-center mb-6">Contact Me</h3>
+<form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm" class="space-y-4">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <input required name="name" ngModel type="text" placeholder="Your name"
+           class="w-full p-3 rounded-lg border" />
+    <input required name="email" ngModel type="email" placeholder="Email"
+           class="w-full p-3 rounded-lg border" />
   </div>
-</nav>
 
-<main class="font-sans bg-gray-50 text-gray-800">
+  <textarea required name="message" ngModel rows="6" placeholder="Message"
+            class="w-full p-3 rounded-lg border"></textarea>
 
-  <!-- Hero Section -->
-  <section id="home" class="h-screen flex flex-col justify-center items-center text-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-    <h1 class="text-4xl md:text-6xl font-bold">Alaa Mahmoud</h1>
-    <p class="text-xl md:text-2xl mt-4">Senior Full Stack Developer</p>
-    <div class="mt-6 space-x-4">
-      <a href="https://github.com/EngAlaaMahmoud" target="_blank" class="px-4 py-2 bg-white text-indigo-600 rounded-lg shadow">GitHub</a>
-      <a href="https://linkedin.com/in/alaa-mahmoud-a03772182" target="_blank" class="px-4 py-2 bg-white text-indigo-600 rounded-lg shadow">LinkedIn</a>
+  <div class="flex items-center justify-between">
+    <div class="flex gap-3">
+      <!-- social links -->
     </div>
-  </section>
+    <button type="submit"
+            class="bg-indigo-600 text-white px-5 py-3 rounded-lg hover:bg-indigo-700">
+      Send Message
+    </button>
+  </div>
 
-  <!-- About Section -->
-  <section id="about" class="max-w-4xl mx-auto py-16 px-6">
-    <h2 class="text-3xl font-bold mb-6">About Me</h2>
-    <p>
-      Senior Full Stack Developer with 7+ years of experience in Angular, ASP.NET Core, and microservices. Delivered 20+ production applications focusing on clean architecture and performance.
-    </p>
-  </section>
+  <!-- مكان عرض الرسالة -->
+  <p *ngIf="statusMessage" [ngClass]="statusClass" class="mt-4 text-center">
+    {{ statusMessage }}
+  </p>
+</form>
 
-  <!-- Skills Section -->
-  <section id="skills" class="bg-gray-100 py-16 px-6">
-    <h2 class="text-3xl font-bold mb-6 text-center">Skills</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div class="p-4 bg-white shadow rounded-lg">Angular</div>
-      <div class="p-4 bg-white shadow rounded-lg">.NET Core</div>
-      <div class="p-4 bg-white shadow rounded-lg">Microservices</div>
-      <div class="p-4 bg-white shadow rounded-lg">SQL Server</div>
-      <div class="p-4 bg-white shadow rounded-lg">Docker</div>
-      <div class="p-4 bg-white shadow rounded-lg">RabbitMQ</div>
-      <div class="p-4 bg-white shadow rounded-lg">Azure DevOps</div>
-      <div class="p-4 bg-white shadow rounded-lg">TypeScript</div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="max-w-5xl mx-auto py-16 px-6">
-    <h2 class="text-3xl font-bold mb-6 text-center">Projects</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white shadow rounded-lg p-4">
-        <h3 class="font-semibold">Invoice Management System</h3>
-        <p class="text-sm">Angular 17, .NET 8, SQL Server</p>
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-100 mt-8">
+      <div class="max-w-6xl mx-auto px-6 text-center text-sm text-gray-600">
+      © <span id="year">{{ year }}</span> Alaa Mahmoud — Built with Angular & Tailwind
       </div>
-      <div class="bg-white shadow rounded-lg p-4">
-        <h3 class="font-semibold">Sakeny Real Estate Portal</h3>
-        <p class="text-sm">Angular 14, .NET 6, PostgreSQL</p>
-      </div>
-      <div class="bg-white shadow rounded-lg p-4">
-        <h3 class="font-semibold">Hotel Booking Microservices</h3>
-        <p class="text-sm">Angular, RabbitMQ, Docker</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="bg-indigo-600 text-white py-16 px-6 text-center">
-    <h2 class="text-3xl font-bold mb-6">Contact</h2>
-    <p>Email: en.alaamahmoud&#64;gmail.com</p>
-    <p>Phone: +20 112 498 0172</p>
-  </section>
-
-</main>
+    </footer>
+  </main>
+</div>

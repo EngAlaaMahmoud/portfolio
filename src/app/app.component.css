@@ -1,0 +1,27 @@
+/* small custom rules alongside Tailwind utilities */
+
+/* smooth scroll for internal anchors */
+:root {
+  scroll-behavior: smooth;
+}
+
+/* fallback sizes */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* subtle hover shadow */
+.shadow-2xl {
+  box-shadow: 0 20px 40px rgba(2,6,23,0.08), 0 2px 6px rgba(2,6,23,0.04);
+}
+
+/* responsive tweaks */
+@media (max-width: 768px) {
+  #hero { padding-top: 6rem; }
+}
+
+/* small utility for AOS timing tweaks if you need */
+[data-aos][data-aos][data-aos-delay] {
+  will-change: transform, opacity;
+}
