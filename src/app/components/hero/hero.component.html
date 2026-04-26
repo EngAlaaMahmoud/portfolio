@@ -1,48 +1,49 @@
-<section id="home" class="section-anchor section-shell hero-shell overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28">
+<section id="home" class="section-anchor section-shell hero-shell overflow-hidden pt-28 pb-16 lg:pt-32 lg:pb-20">
   <div class="section-container relative">
-    <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+    <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:gap-12">
       <div appReveal class="relative z-10">
         <span class="section-kicker">Senior Enterprise Portfolio</span>
-        <h1 class="mt-6 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <h1 class="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-[3.65rem]">
           {{ hero().name }}
         </h1>
-        <p class="mt-4 text-xl font-semibold text-slate-100 sm:text-2xl">{{ hero().title }}</p>
-        <p class="mt-5 text-xs font-semibold uppercase tracking-[0.34em] text-sky-200 sm:text-sm">
+        <p class="mt-3 text-xl font-semibold text-slate-100 sm:text-[1.55rem]">{{ hero().title }}</p>
+        <p class="mt-4 text-xs font-semibold uppercase tracking-[0.34em] text-sky-200 sm:text-sm">
           {{ hero().stackLine }}
         </p>
-        <p class="mt-8 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
+        <p class="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
           {{ hero().summary }}
         </p>
 
-        <div class="mt-10 flex flex-wrap gap-3">
+        <div class="mt-8 flex flex-wrap gap-3">
           @for (action of hero().actions; track action.label) {
             <a
               [href]="action.href"
               [class]="actionClass(action.variant)"
               [attr.target]="action.external ? '_blank' : null"
               [attr.rel]="action.external ? 'noreferrer' : null"
+              [attr.aria-label]="action.ariaLabel ?? action.label"
             >
               {{ action.label }}
             </a>
           }
         </div>
 
-        <div class="mt-12 grid gap-4 md:grid-cols-3">
+        <div class="mt-10 grid gap-4 md:grid-cols-3">
           @for (highlight of highlights(); track highlight.label; let index = $index) {
-            <article appReveal [appReveal]="120 + index * 80" class="hero-stat rounded-3xl p-5">
+            <article appReveal [appReveal]="120 + index * 80" class="hero-stat rounded-3xl p-4 sm:p-5">
               <p class="text-2xl font-semibold text-white">{{ highlight.value }}</p>
               <p class="mt-2 text-sm font-semibold text-slate-100">{{ highlight.label }}</p>
-              <p class="mt-3 text-sm leading-6 text-slate-300">{{ highlight.detail }}</p>
+              <p class="mt-2 text-sm leading-6 text-slate-300">{{ highlight.detail }}</p>
             </article>
           }
         </div>
       </div>
 
-      <div appReveal [appReveal]="160" class="relative">
+      <div appReveal [appReveal]="160" class="relative lg:justify-self-end">
         <div class="absolute -top-10 right-8 h-32 w-32 rounded-full bg-emerald-400/20 blur-3xl"></div>
         <div class="absolute -bottom-12 left-8 h-36 w-36 rounded-full bg-blue-400/20 blur-3xl"></div>
 
-        <div class="profile-frame relative overflow-hidden rounded-[2rem] p-7 sm:p-8">
+        <div class="profile-frame relative mx-auto max-w-[25.5rem] overflow-hidden rounded-[2rem] p-6 sm:p-7">
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(96,165,250,0.18),_transparent_28%),radial-gradient(circle_at_bottom_left,_rgba(52,211,153,0.18),_transparent_30%)]"></div>
 
           <div class="relative">
@@ -51,11 +52,11 @@
               <span class="rounded-full border border-slate-700 px-3 py-2">{{ profile().experience }}</span>
             </div>
 
-            <div class="mt-8 flex items-center gap-4">
+            <div class="mt-7 flex items-center gap-4">
               <img
                 [src]="profile().avatarUrl"
                 [alt]="profile().name"
-                class="h-24 w-24 rounded-[1.75rem] border border-slate-700/80 object-cover shadow-2xl"
+                class="h-20 w-20 rounded-[1.5rem] border border-slate-700/80 object-cover shadow-2xl sm:h-24 sm:w-24"
               >
 
               <div>
@@ -64,9 +65,9 @@
               </div>
             </div>
 
-            <p class="mt-8 text-sm leading-7 text-slate-300">{{ profile().availability }}</p>
+            <p class="mt-6 text-sm leading-7 text-slate-300">{{ profile().availability }}</p>
 
-            <div class="mt-8 space-y-3">
+            <div class="mt-6 space-y-3">
               @for (focus of profile().focusAreas; track focus) {
                 <div class="focus-card rounded-2xl p-4">
                   <p class="text-sm font-medium leading-6 text-slate-100">{{ focus }}</p>

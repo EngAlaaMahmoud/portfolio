@@ -9,6 +9,7 @@ export interface HeroAction {
   label: string;
   href: string;
   variant: 'primary' | 'secondary' | 'ghost';
+  ariaLabel?: string;
   external?: boolean;
 }
 
@@ -52,10 +53,17 @@ export interface ExperienceItem {
   technologies: string[];
 }
 
+export interface SectionContent {
+  kicker: string;
+  title: string;
+  description: string;
+}
+
 export interface ProjectAction {
   label: string;
   href: string;
   variant: 'primary' | 'secondary';
+  ariaLabel?: string;
   external?: boolean;
 }
 
@@ -65,8 +73,7 @@ export interface ProjectItem {
   tags: string[];
   status: string;
   statusTone: 'emerald' | 'blue' | 'amber';
-  primaryAction: ProjectAction;
-  secondaryAction?: ProjectAction;
+  actions: ProjectAction[];
 }
 
 export interface EducationItem {
@@ -104,6 +111,7 @@ export interface PortfolioData {
   hero: HeroData;
   highlights: HeroHighlight[];
   skills: SkillGroup[];
+  experienceSection: SectionContent;
   experiences: ExperienceItem[];
   projects: ProjectItem[];
   education: EducationItem;
@@ -144,12 +152,23 @@ export const portfolioData: PortfolioData = {
     summary:
       'I build scalable enterprise web applications, ERP systems, booking platforms, dashboards, and integration solutions using ASP.NET Core, Angular, SQL Server, and Clean Architecture.',
     actions: [
-      { label: 'View Projects', href: '#projects', variant: 'primary' },
-      { label: 'Contact Me', href: '#contact', variant: 'secondary' },
+      {
+        label: 'View Projects',
+        href: '#projects',
+        variant: 'primary',
+        ariaLabel: 'Jump to the projects section'
+      },
+      {
+        label: 'Contact Me',
+        href: '#contact',
+        variant: 'secondary',
+        ariaLabel: 'Jump to the contact section'
+      },
       {
         label: 'GitHub',
         href: 'https://github.com/EngAlaaMahmoud',
         variant: 'ghost',
+        ariaLabel: 'Open the GitHub profile for Alaa Mahmoud',
         external: true
       }
     ]
@@ -203,6 +222,12 @@ export const portfolioData: PortfolioData = {
       items: ['Git', 'GitHub', 'IIS', 'Docker basics', 'Serilog', 'Swagger', 'Postman']
     }
   ],
+  experienceSection: {
+    kicker: 'Experience',
+    title: 'Enterprise delivery with operational ownership and product context',
+    description:
+      'Across product teams, customer deployments, and consulting engagements, I focus on software that improves operational flow, supports compliance, and stays maintainable after release.'
+  },
   experiences: [
     {
       role: 'Senior Full Stack .NET Developer',
@@ -210,9 +235,9 @@ export const portfolioData: PortfolioData = {
       location: 'Remote',
       period: 'Dec 2025 - Present',
       responsibilities: [
-        'Building and maintaining enterprise web applications using ASP.NET Core and Angular.',
-        'Working on ERP integrations, tax integrations, food authority integrations, and customer deployments.',
-        'Handling production support, deployment, and client communication.'
+        'Lead delivery of enterprise web applications with ASP.NET Core and Angular, balancing product requirements with reliability, maintainability, and release speed.',
+        'Own ERP, tax authority, and food authority integrations, translating compliance-heavy workflows into stable production-ready solutions.',
+        'Support customer deployments, production triage, and client communication to keep live environments aligned with business expectations.'
       ],
       technologies: ['ASP.NET Core', 'Angular', 'SQL Server', 'ERP Integrations', 'Production Support']
     },
@@ -222,9 +247,9 @@ export const portfolioData: PortfolioData = {
       location: 'Egypt',
       period: '2023 - 2025',
       responsibilities: [
-        'Developed ERP modules and financial/invoicing workflows.',
-        'Worked with Angular, .NET, SQL Server, microservices concepts, RabbitMQ, Docker, and CI/CD.',
-        'Improved performance, maintainability, and system reliability.'
+        'Delivered ERP modules and financial workflows that supported invoicing accuracy, operational visibility, and day-to-day business execution.',
+        'Contributed across Angular, .NET, SQL Server, RabbitMQ, Docker, and CI/CD practices to strengthen delivery quality and release confidence.',
+        'Improved performance, maintainability, and system reliability through cleaner service boundaries, refactoring, and targeted optimization.'
       ],
       technologies: ['Angular', '.NET', 'SQL Server', 'RabbitMQ', 'Docker', 'CI/CD']
     },
@@ -234,8 +259,8 @@ export const portfolioData: PortfolioData = {
       location: 'Giza, Egypt',
       period: 'Selected engagements',
       responsibilities: [
-        'Built small business systems, dashboards, ERP modules, and integrations.',
-        'Delivered practical solutions for local clients.'
+        'Designed and shipped practical business systems, dashboards, ERP extensions, and integrations tailored to local operational needs.',
+        'Translated client requirements into maintainable software with fast feedback loops, direct collaboration, and pragmatic delivery decisions.'
       ],
       technologies: ['.NET', 'Angular', 'Dashboards', 'ERP Modules', 'Client Delivery']
     }
@@ -248,13 +273,14 @@ export const portfolioData: PortfolioData = {
       tags: ['.NET', 'Blazor/Angular', 'SQL Server', 'Clean Architecture'],
       status: 'Operations platform',
       statusTone: 'emerald',
-      primaryAction: { label: 'Discuss Project', href: '#contact', variant: 'primary' },
-      secondaryAction: {
-        label: 'GitHub Profile',
-        href: 'https://github.com/EngAlaaMahmoud',
-        variant: 'secondary',
-        external: true
-      }
+      actions: [
+        {
+          label: 'Case Study',
+          href: '#contact',
+          variant: 'primary',
+          ariaLabel: 'Discuss the Mini ERP case study'
+        }
+      ]
     },
     {
       name: 'GoFleet / Bus Booking Platform',
@@ -263,13 +289,14 @@ export const portfolioData: PortfolioData = {
       tags: ['.NET 9', 'Angular', 'JWT', 'Clean Architecture'],
       status: 'Booking workflow',
       statusTone: 'blue',
-      primaryAction: { label: 'Discuss Project', href: '#contact', variant: 'primary' },
-      secondaryAction: {
-        label: 'GitHub Profile',
-        href: 'https://github.com/EngAlaaMahmoud',
-        variant: 'secondary',
-        external: true
-      }
+      actions: [
+        {
+          label: 'Case Study',
+          href: '#contact',
+          variant: 'primary',
+          ariaLabel: 'Discuss the GoFleet and Bus Booking Platform case study'
+        }
+      ]
     },
     {
       name: 'GoldBranch Integration',
@@ -278,13 +305,14 @@ export const portfolioData: PortfolioData = {
       tags: ['ASP.NET Core', 'Angular SSR', 'SQL Server', 'Multi-tenancy'],
       status: 'Enterprise integration',
       statusTone: 'amber',
-      primaryAction: { label: 'Discuss Project', href: '#contact', variant: 'primary' },
-      secondaryAction: {
-        label: 'GitHub Profile',
-        href: 'https://github.com/EngAlaaMahmoud',
-        variant: 'secondary',
-        external: true
-      }
+      actions: [
+        {
+          label: 'Case Study',
+          href: '#contact',
+          variant: 'primary',
+          ariaLabel: 'Discuss the GoldBranch Integration case study'
+        }
+      ]
     },
     {
       name: 'Egypt E-Invoice API',
@@ -293,13 +321,14 @@ export const portfolioData: PortfolioData = {
       tags: ['.NET', 'ETA', 'PKCS#11', 'Digital Signature'],
       status: 'Government API',
       statusTone: 'amber',
-      primaryAction: { label: 'Discuss Project', href: '#contact', variant: 'primary' },
-      secondaryAction: {
-        label: 'GitHub Profile',
-        href: 'https://github.com/EngAlaaMahmoud',
-        variant: 'secondary',
-        external: true
-      }
+      actions: [
+        {
+          label: 'Case Study',
+          href: '#contact',
+          variant: 'primary',
+          ariaLabel: 'Discuss the Egypt E-Invoice API case study'
+        }
+      ]
     },
     {
       name: 'Zid ERP Integration',
@@ -308,13 +337,14 @@ export const portfolioData: PortfolioData = {
       tags: ['.NET', 'Webhooks', 'SQL Server', 'Hangfire'],
       status: 'Middleware concept',
       statusTone: 'emerald',
-      primaryAction: { label: 'Discuss Project', href: '#contact', variant: 'primary' },
-      secondaryAction: {
-        label: 'GitHub Profile',
-        href: 'https://github.com/EngAlaaMahmoud',
-        variant: 'secondary',
-        external: true
-      }
+      actions: [
+        {
+          label: 'Case Study',
+          href: '#contact',
+          variant: 'primary',
+          ariaLabel: 'Discuss the Zid ERP Integration case study'
+        }
+      ]
     },
     {
       name: 'ERP Dashboard Theme',
@@ -323,13 +353,14 @@ export const portfolioData: PortfolioData = {
       tags: ['Angular', 'Tailwind', 'Dashboard UI'],
       status: 'UI system',
       statusTone: 'blue',
-      primaryAction: { label: 'Discuss Project', href: '#contact', variant: 'primary' },
-      secondaryAction: {
-        label: 'GitHub Profile',
-        href: 'https://github.com/EngAlaaMahmoud',
-        variant: 'secondary',
-        external: true
-      }
+      actions: [
+        {
+          label: 'Case Study',
+          href: '#contact',
+          variant: 'primary',
+          ariaLabel: 'Discuss the ERP Dashboard Theme case study'
+        }
+      ]
     }
   ],
   education: {
@@ -344,7 +375,7 @@ export const portfolioData: PortfolioData = {
     closing:
       'Available for senior engineering roles, solution architecture support, and enterprise delivery collaborations.',
     githubUrl: 'https://github.com/EngAlaaMahmoud',
-    emailHref: 'mailto:your.email@example.com',
+    emailHref: 'mailto:alaa.mahmoud.dotnet@gmail.com',
     items: [
       {
         label: 'GitHub',
@@ -355,17 +386,17 @@ export const portfolioData: PortfolioData = {
       },
       {
         label: 'LinkedIn',
-        value: 'linkedin.com/in/your-linkedin',
-        href: 'https://www.linkedin.com/in/your-linkedin/',
-        hint: 'Placeholder ready to replace from this data file.',
-        available: false
+        value: 'linkedin.com/in/alaa-mahmoud-88998b3a8',
+        href: 'https://www.linkedin.com/in/alaa-mahmoud-88998b3a8/',
+        hint: 'Professional profile, experience history, and networking contact.',
+        available: true
       },
       {
         label: 'Email',
-        value: 'your.email@example.com',
-        href: 'mailto:your.email@example.com',
-        hint: 'Placeholder ready to replace from this data file.',
-        available: false
+        value: 'alaa.mahmoud.dotnet@gmail.com',
+        href: 'mailto:alaa.mahmoud.dotnet@gmail.com',
+        hint: 'Primary contact email for roles, consulting, and project discussions.',
+        available: true
       },
       {
         label: 'Location',

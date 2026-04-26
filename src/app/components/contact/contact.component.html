@@ -16,6 +16,7 @@
               [href]="item.href"
               [attr.target]="item.label === 'Location' ? '_blank' : item.label !== 'Email' ? '_blank' : null"
               [attr.rel]="item.label === 'Email' ? null : 'noreferrer'"
+              [attr.aria-label]="item.label + ': ' + item.value"
               class="contact-card surface-card block p-5"
               [class.contact-card-placeholder]="!item.available"
             >
@@ -35,8 +36,12 @@
         <p class="mt-6 text-base leading-8 text-[color:var(--muted)]">{{ contact().closing }}</p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          <a [href]="contact().githubUrl" target="_blank" rel="noreferrer" class="btn-primary">View GitHub</a>
-          <a [href]="contact().emailHref" class="btn-secondary">Send Email</a>
+          <a [href]="contact().githubUrl" target="_blank" rel="noreferrer" class="btn-primary" aria-label="Open GitHub profile">
+            View GitHub
+          </a>
+          <a [href]="contact().emailHref" class="btn-secondary" aria-label="Send an email">
+            Send Email
+          </a>
         </div>
       </div>
     </div>

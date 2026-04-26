@@ -13,46 +13,38 @@
         <article
           appReveal
           [appReveal]="index * 80"
-          class="project-card surface-card flex h-full flex-col overflow-hidden p-6"
+          class="project-card surface-card flex h-full flex-col overflow-hidden p-6 lg:p-7"
         >
           <div class="flex items-start justify-between gap-4">
             <span class="status-chip" [attr.data-tone]="project.statusTone">{{ project.status }}</span>
             <span class="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">Case {{ index + 1 }}</span>
           </div>
 
-          <div class="mt-8">
+          <div class="project-content mt-7 flex flex-1 flex-col">
             <h3 class="text-2xl font-semibold text-[color:var(--text)]">{{ project.name }}</h3>
             <p class="mt-4 text-sm leading-7 text-[color:var(--muted)] sm:text-base">
               {{ project.description }}
             </p>
-          </div>
 
-          <div class="mt-6 flex flex-wrap gap-2">
-            @for (tag of project.tags; track tag) {
-              <span class="pill">{{ tag }}</span>
-            }
-          </div>
+            <div class="mt-6 flex flex-wrap gap-2">
+              @for (tag of project.tags; track tag) {
+                <span class="pill">{{ tag }}</span>
+              }
+            </div>
 
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a
-              [href]="project.primaryAction.href"
-              [class]="actionClass(project.primaryAction.variant)"
-              [attr.target]="project.primaryAction.external ? '_blank' : null"
-              [attr.rel]="project.primaryAction.external ? 'noreferrer' : null"
-            >
-              {{ project.primaryAction.label }}
-            </a>
-
-            @if (project.secondaryAction) {
-              <a
-                [href]="project.secondaryAction.href"
-                [class]="actionClass(project.secondaryAction.variant)"
-                [attr.target]="project.secondaryAction.external ? '_blank' : null"
-                [attr.rel]="project.secondaryAction.external ? 'noreferrer' : null"
-              >
-                {{ project.secondaryAction.label }}
-              </a>
-            }
+            <div class="project-actions mt-auto flex flex-wrap gap-3 pt-8">
+              @for (action of project.actions; track action.label) {
+                <a
+                  [href]="action.href"
+                  [class]="actionClass(action.variant)"
+                  [attr.target]="action.external ? '_blank' : null"
+                  [attr.rel]="action.external ? 'noreferrer' : null"
+                  [attr.aria-label]="action.ariaLabel ?? (action.label + ' for ' + project.name)"
+                >
+                  {{ action.label }}
+                </a>
+              }
+            </div>
           </div>
         </article>
       }

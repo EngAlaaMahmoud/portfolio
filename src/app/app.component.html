@@ -16,7 +16,10 @@
     />
 
     <app-skills [skills]="portfolio.skills" />
-    <app-experience [experiences]="portfolio.experiences" />
+    <app-experience
+      [section]="portfolio.experienceSection"
+      [experiences]="portfolio.experiences"
+    />
     <app-projects [projects]="portfolio.projects" />
     <app-education [education]="portfolio.education" />
     <app-contact [contact]="portfolio.contact" />

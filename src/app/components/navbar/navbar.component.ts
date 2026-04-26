@@ -17,11 +17,17 @@ export class NavbarComponent {
   readonly themeToggled = output<void>();
 
   protected readonly menuOpen = signal(false);
+  protected readonly menuId = 'primary-navigation-mobile';
   protected scrolled = false;
 
   @HostListener('window:scroll')
   onScroll(): void {
     this.scrolled = window.scrollY > 16;
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closeMenu();
   }
 
   protected toggleMenu(): void {

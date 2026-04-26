@@ -24,6 +24,10 @@
   box-shadow: var(--shadow-strong);
 }
 
+.project-actions {
+  align-items: flex-end;
+}
+
 .status-chip {
   display: inline-flex;
   align-items: center;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { ExperienceItem } from '../../data/portfolio-data';
+import { ExperienceItem, SectionContent } from '../../data/portfolio-data';
 import { RevealDirective } from '../../shared/reveal.directive';
 
 @Component({
@@ -10,5 +10,6 @@ import { RevealDirective } from '../../shared/reveal.directive';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExperienceComponent {
+  readonly section = input.required<SectionContent>();
   readonly experiences = input.required<ExperienceItem[]>();
 }
