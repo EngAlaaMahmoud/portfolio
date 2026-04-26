@@ -1,0 +1,44 @@
+<section id="contact" class="section-anchor section-shell py-20 lg:py-24">
+  <div class="section-container">
+    <div class="grid gap-8 xl:grid-cols-[1.08fr_0.92fr]">
+      <div>
+        <div appReveal class="max-w-3xl">
+          <span class="section-kicker">Contact</span>
+          <h2 class="section-title">Let&apos;s build enterprise software that lasts</h2>
+          <p class="section-copy">{{ contact().intro }}</p>
+        </div>
+
+        <div class="mt-10 grid gap-4 sm:grid-cols-2">
+          @for (item of contact().items; track item.label; let index = $index) {
+            <a
+              appReveal
+              [appReveal]="index * 80"
+              [href]="item.href"
+              [attr.target]="item.label === 'Location' ? '_blank' : item.label !== 'Email' ? '_blank' : null"
+              [attr.rel]="item.label === 'Email' ? null : 'noreferrer'"
+              class="contact-card surface-card block p-5"
+              [class.contact-card-placeholder]="!item.available"
+            >
+              <p class="text-xs font-semibold uppercase tracking-[0.26em] text-[color:var(--accent)]">{{ item.label }}</p>
+              <p class="mt-4 text-lg font-semibold text-[color:var(--text)]">{{ item.value }}</p>
+              <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{{ item.hint }}</p>
+            </a>
+          }
+        </div>
+      </div>
+
+      <div appReveal [appReveal]="180" class="surface-card-strong contact-cta overflow-hidden p-8 sm:p-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.28em] text-[color:var(--accent)]">Availability</p>
+        <h3 class="mt-6 text-3xl font-semibold text-[color:var(--text)]">
+          Senior full stack engineering with enterprise context
+        </h3>
+        <p class="mt-6 text-base leading-8 text-[color:var(--muted)]">{{ contact().closing }}</p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a [href]="contact().githubUrl" target="_blank" rel="noreferrer" class="btn-primary">View GitHub</a>
+          <a [href]="contact().emailHref" class="btn-secondary">Send Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<section id="education" class="section-anchor section-shell py-20 lg:py-24">
+  <div class="section-container">
+    <div appReveal class="max-w-3xl">
+      <span class="section-kicker">Education</span>
+      <h2 class="section-title">Academic foundation behind the delivery work</h2>
+      <p class="section-copy">
+        The technical base behind my professional work started with computer science fundamentals and grew into hands-on enterprise software engineering through years of real-world delivery.
+      </p>
+    </div>
+
+    <article appReveal [appReveal]="100" class="surface-card-strong education-card mt-12 overflow-hidden p-8 lg:p-10">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[color:var(--accent)]">Degree</p>
+          <h3 class="mt-4 text-3xl font-semibold text-[color:var(--text)]">{{ education().degree }}</h3>
+          <p class="mt-4 text-lg text-[color:var(--muted)]">{{ education().institution }}</p>
+        </div>
+
+        <div class="education-summary">
+          <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[color:var(--accent)]">Period</p>
+          <p class="mt-4 text-xl font-semibold text-[color:var(--text)]">{{ education().period }}</p>
+          <p class="mt-4 text-sm leading-7 text-[color:var(--muted)] sm:text-base">{{ education().note }}</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,78 +1,79 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
-import * as AOS from 'aos';
+import { ChangeDetectionStrategy, Component, DOCUMENT, effect, inject, signal } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { ContactComponent } from './components/contact/contact.component';
+import { EducationComponent } from './components/education/education.component';
+import { ExperienceComponent } from './components/experience/experience.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeroComponent } from './components/hero/hero.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { SkillsComponent } from './components/skills/skills.component';
+import { ThemeMode, portfolioData } from './data/portfolio-data';
+
+const THEME_STORAGE_KEY = 'portfolio-theme';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    NavbarComponent,
+    HeroComponent,
+    SkillsComponent,
+    ExperienceComponent,
+    ProjectsComponent,
+    EducationComponent,
+    ContactComponent,
+    FooterComponent
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrl: './app.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
-  title = 'portfolio-app';
-  year: number = new Date().getFullYear();
-  scrolled = false;
-  isMenuOpen = false; // للتحكم في المينيو
+export class AppComponent {
+  readonly portfolio = portfolioData;
+  readonly currentYear = new Date().getFullYear();
+  readonly theme = signal<ThemeMode>(this.getInitialTheme());
 
-  // 📨 رسالة الحالة بعد الإرسال
-  statusMessage: string = '';
-  statusClass: string = '';
+  private readonly document = inject(DOCUMENT);
+  private readonly title = inject(Title);
+  private readonly meta = inject(Meta);
 
-  ngOnInit(): void {
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+  constructor() {
+    this.title.setTitle(this.portfolio.seo.title);
+    this.meta.updateTag({ name: 'description', content: this.portfolio.seo.description });
 
-    window.addEventListener('scroll', () => {
-      this.scrolled = window.scrollY > 50;
-    });
-  }
+    effect(() => {
+      const activeTheme = this.theme();
+      const root = this.document.documentElement;
 
-  // ✅ دالة الـ scroll
-  scrollTo(sectionId: string): void {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      this.isMenuOpen = false; // يقفل المينيو لو فاتح على الموبايل
-    }
-  }
+      root.setAttribute('data-theme', activeTheme);
+      root.style.colorScheme = activeTheme;
 
-  // ✅ دالة فتح/قفل المينيو
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
-
-  // ✅ إرسال الفورم لـ Formspree
-  async onSubmit(form: NgForm) {
-    if (form.invalid) return;
-
-    const data = new FormData();
-    data.append('name', form.value.name);
-    data.append('email', form.value.email);
-    data.append('message', form.value.message);
-
-    try {
-      const response = await fetch('https://formspree.io/f/mzzaqrbz', {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' }
-      });
-
-      if (response.ok) {
-        this.statusMessage = '✅ Thanks! Your message has been sent successfully.';
-        this.statusClass = 'text-green-600';
-        form.reset();
-      } else {
-        this.statusMessage = '❌ Oops! Something went wrong. Please try again.';
-        this.statusClass = 'text-red-600';
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem(THEME_STORAGE_KEY, activeTheme);
       }
-    } catch (error) {
-      this.statusMessage = '❌ Network error. Please try again later.';
-      this.statusClass = 'text-red-600';
+
+      this.meta.updateTag({
+        name: 'theme-color',
+        content: activeTheme === 'dark' ? '#020617' : '#f4f7fb'
+      });
+    });
+  }
+
+  toggleTheme(): void {
+    this.theme.update((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'));
+  }
+
+  private getInitialTheme(): ThemeMode {
+    if (typeof window === 'undefined') {
+      return 'dark';
     }
+
+    const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      return storedTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
 }

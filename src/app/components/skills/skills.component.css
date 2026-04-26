@@ -1,0 +1,65 @@
+:host {
+  display: block;
+}
+
+.skill-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-strong);
+}
+
+.skill-card::after {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.24), transparent);
+}
+
+.skill-badge {
+  display: inline-flex;
+  min-height: 2.9rem;
+  min-width: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+[data-tone='emerald'] .skill-badge {
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+}
+
+[data-tone='blue'] .skill-badge {
+  color: #60a5fa;
+  background: rgba(96, 165, 250, 0.12);
+}
+
+[data-tone='cyan'] .skill-badge {
+  color: #22d3ee;
+  background: rgba(34, 211, 238, 0.12);
+}
+
+[data-tone='slate'] .skill-badge {
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.12);
+}
+
+[data-tone='amber'] .skill-badge {
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.12);
+}

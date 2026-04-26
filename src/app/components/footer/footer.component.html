@@ -1,0 +1,14 @@
+<footer class="section-shell pb-8 pt-4">
+  <div class="section-container">
+    <div class="surface-card footer-shell flex flex-col gap-4 px-6 py-5 text-sm sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-[color:var(--muted)]">
+        {{ year() }} {{ name() }}. {{ title() }} portfolio built with Angular and Tailwind CSS.
+      </p>
+
+      <div class="flex items-center gap-4 text-[color:var(--muted)]">
+        <a href="#home" class="footer-link">Back to top</a>
+        <a [href]="githubUrl()" target="_blank" rel="noreferrer" class="footer-link">GitHub</a>
+      </div>
+    </div>
+  </div>
+</footer>

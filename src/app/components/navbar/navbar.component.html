@@ -1,0 +1,87 @@
+<header class="fixed inset-x-0 top-0 z-50">
+  <div class="mx-auto max-w-6xl px-4 pt-4 sm:px-6 lg:px-8">
+    <div class="nav-shell" [class.nav-shell-scrolled]="scrolled">
+      <a href="#home" class="flex items-center gap-3" (click)="closeMenu()">
+        <span class="brand-mark">AM</span>
+        <div class="min-w-0">
+          <p class="truncate text-sm font-semibold text-[color:var(--text)]">{{ brandName() }}</p>
+          <p class="truncate text-xs text-[color:var(--muted)]">{{ brandTitle() }}</p>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-1 lg:flex">
+        @for (item of navItems(); track item.sectionId) {
+          <a class="nav-link" [href]="'#' + item.sectionId">{{ item.label }}</a>
+        }
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          class="theme-toggle"
+          aria-label="Toggle color theme"
+          (click)="themeToggled.emit()"
+        >
+          @if (theme() === 'dark') {
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 3v2.25M12 18.75V21M4.5 12H2.25M21.75 12H19.5M5.99 5.99l1.59 1.59M18.42 18.42l-1.59-1.59M18.01 5.99l-1.59 1.59M7.58 18.42l-1.59-1.59M15.75 12a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0Z"
+              />
+            </svg>
+          } @else {
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 0 1 11.21 3a7.5 7.5 0 1 0 9.79 9.79Z" />
+            </svg>
+          }
+        </button>
+
+        <a
+          [href]="githubUrl()"
+          target="_blank"
+          rel="noreferrer"
+          class="btn-secondary hidden sm:inline-flex"
+        >
+          GitHub
+        </a>
+
+        <button
+          type="button"
+          class="menu-toggle lg:hidden"
+          aria-label="Toggle navigation menu"
+          [attr.aria-expanded]="menuOpen()"
+          (click)="toggleMenu()"
+        >
+          @if (!menuOpen()) {
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+          } @else {
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          }
+        </button>
+      </div>
+    </div>
+
+    @if (menuOpen()) {
+      <div class="surface-card mt-3 overflow-hidden p-3 lg:hidden">
+        <nav class="flex flex-col gap-1">
+          @for (item of navItems(); track item.sectionId) {
+            <a class="mobile-link" [href]="'#' + item.sectionId" (click)="closeMenu()">{{ item.label }}</a>
+          }
+        </nav>
+
+        <a
+          [href]="githubUrl()"
+          target="_blank"
+          rel="noreferrer"
+          class="btn-primary mt-4 w-full"
+          (click)="closeMenu()"
+        >
+          Open GitHub
+        </a>
+      </div>
+    }
+  </div>
+</header>

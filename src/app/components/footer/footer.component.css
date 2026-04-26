@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.footer-shell {
+  border-radius: 1.5rem;
+}
+
+.footer-link {
+  transition: color 200ms ease;
+}
+
+.footer-link:hover {
+  color: var(--text);
+}

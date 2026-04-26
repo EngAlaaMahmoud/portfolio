@@ -1,0 +1,36 @@
+<section id="skills" class="section-anchor section-shell py-20 lg:py-24">
+  <div class="section-container">
+    <div appReveal class="max-w-3xl">
+      <span class="section-kicker">Core Capabilities</span>
+      <h2 class="section-title">A balanced stack for enterprise delivery</h2>
+      <p class="section-copy">
+        I work across backend architecture, Angular interfaces, SQL Server design, and the deployment tools needed to keep business-critical software reliable in production.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+      @for (group of skills(); track group.title; let index = $index) {
+        <article
+          appReveal
+          [appReveal]="index * 90"
+          class="skill-card surface-card flex h-full flex-col p-6"
+          [attr.data-tone]="group.tone"
+        >
+          <div class="flex items-center gap-4">
+            <span class="skill-badge">{{ group.title.slice(0, 2) }}</span>
+            <div>
+              <h3 class="text-lg font-semibold text-[color:var(--text)]">{{ group.title }}</h3>
+              <p class="mt-1 text-sm leading-6 text-[color:var(--muted)]">{{ group.description }}</p>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            @for (item of group.items; track item) {
+              <span class="pill">{{ item }}</span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

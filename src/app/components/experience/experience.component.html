@@ -1,0 +1,44 @@
+<section id="experience" class="section-anchor section-shell py-20 lg:py-24">
+  <div class="section-container">
+    <div appReveal class="max-w-3xl">
+      <span class="section-kicker">Experience</span>
+      <h2 class="section-title">Senior delivery across enterprise products and integrations</h2>
+      <p class="section-copy">
+        My recent work combines product delivery, client-facing communication, production support, and the practical engineering choices required for long-running ERP and integration platforms.
+      </p>
+    </div>
+
+    <div class="timeline mt-12">
+      @for (item of experiences(); track item.company + item.period; let index = $index) {
+        <article appReveal [appReveal]="index * 100" class="timeline-item pb-8 lg:pb-10">
+          <div class="surface-card overflow-hidden p-6 lg:p-8">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div>
+                <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[color:var(--accent)]">{{ item.role }}</p>
+                <h3 class="mt-3 text-2xl font-semibold text-[color:var(--text)]">{{ item.company }}</h3>
+                <p class="mt-2 text-sm text-[color:var(--muted)]">{{ item.location }}</p>
+              </div>
+
+              <span class="timeline-period">{{ item.period }}</span>
+            </div>
+
+            <ul class="mt-6 space-y-3 text-sm leading-7 text-[color:var(--muted)] sm:text-base">
+              @for (responsibility of item.responsibilities; track responsibility) {
+                <li class="flex gap-3">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-[color:var(--accent)]"></span>
+                  <span>{{ responsibility }}</span>
+                </li>
+              }
+            </ul>
+
+            <div class="mt-6 flex flex-wrap gap-2">
+              @for (technology of item.technologies; track technology) {
+                <span class="pill">{{ technology }}</span>
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
