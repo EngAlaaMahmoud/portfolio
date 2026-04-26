@@ -25,6 +25,8 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -35,21 +37,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Angular app
+      - name: Build Angular app for GitHub Pages
         run: npm run build:github-pages
 
-      - name: Add .nojekyll
-        run: touch dist/portfolio-app/browser/.nojekyll
-
-      - name: Upload Pages artifact
+      - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/portfolio-app/browser
+          path: ./dist/portfolio/browser
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     needs: build
     runs-on: ubuntu-latest
 

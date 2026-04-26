@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: light;
+  --navbar-clearance: 5.5rem;
   --bg: #f4f7fb;
   --bg-alt: #eef4f8;
   --surface: rgba(255, 255, 255, 0.92);
@@ -113,7 +114,7 @@ section {
 }
 
 .section-anchor {
-  scroll-margin-top: 6.25rem;
+  scroll-margin-top: var(--navbar-clearance);
 }
 
 .section-kicker {
@@ -197,6 +198,18 @@ section {
 :where(a, button):focus-visible {
   outline: 2px solid var(--accent-strong);
   outline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --navbar-clearance: 5.85rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --navbar-clearance: 6.25rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
